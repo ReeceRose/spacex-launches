@@ -3,35 +3,34 @@ import Head from "next/head";
 import { ApolloClient, InMemoryCache, gql } from "@apollo/client";
 
 export default function Home({ launches }: any) {
-  console.log(typeof launches);
-  console.log(launches);
   return (
-    <div className="container flex">
+    <div className="container pt-40 mx-auto text-center">
       <Head>
         <title>SpaceX Launches</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1>SpaceX Lauches</h1>
-        <p>Latest launches from SpaceX</p>
+      <h1 className="text-6xl font-bold">SpaceX Lauches</h1>
+      <p className="pt-6 pb-8 text-xl">Latest launches from SpaceX</p>
 
-        <div className="">
-          {launches.map((launch: any) => {
-            return (
-              <a key={launch.id} href={launch.links.video_link} className="">
-                <h3>{launch.mission_name}</h3>
-                <p>
-                  <strong>Launch Date:</strong>{" "}
-                  {new Date(launch.launch_date_local).toLocaleDateString(
-                    "en-US"
-                  )}
-                </p>
-              </a>
-            );
-          })}
-        </div>
-      </main>
+      <div className="grid grid-cols-2 gap-4 pb-6 align-middle justify-items-stretch">
+        {launches.map((launch: any) => {
+          return (
+            <a
+              key={launch.id}
+              href={launch.links.video_link}
+              target="_blank"
+              className="p-12 border border-gray-200 rounded hover:border-blue-600"
+            >
+              <h3 className="text-xl">{launch.mission_name}</h3>
+              <p>
+                <strong>Launch Date:</strong>{" "}
+                {new Date(launch.launch_date_local).toLocaleDateString("en-US")}
+              </p>
+            </a>
+          );
+        })}
+      </div>
     </div>
   );
 }
